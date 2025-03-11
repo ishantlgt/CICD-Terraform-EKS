@@ -3,7 +3,7 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = 'us-east-2'
+        AWS_DEFAULT_REGION = 'us-east-1'
     }
     stages{
         stage('Checkout SCM'){
@@ -46,7 +46,7 @@ pipeline {
                     dir('EKS'){
                          sh 'terraform plan'
                     }
-                    input(message: "Are you sure to proceed?", ok: "proceed")
+                   // input(message: "Are you sure to proceed?", ok: "proceed")
                 }
             }
         }
@@ -54,7 +54,7 @@ pipeline {
             steps{
                 script{
                     dir('EKS'){
-                         sh 'terraform $action --auto-approve'
+                         sh 'terraform  --auto-approve'
                     }
                 }
             }
